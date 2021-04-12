@@ -10,11 +10,8 @@ interface IStepProgressProps {
 
 export const StepProgress = ({
   activeStep,
-  totalSteps,
   steps,
 }: IStepProgressProps): ReactElement => {
-  const isLastStep = activeStep === totalSteps
-
   return (
     <Stepper activeStep={activeStep}>
       {steps.map(({ label }) => (

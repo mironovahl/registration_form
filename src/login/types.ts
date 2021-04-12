@@ -20,23 +20,9 @@ export type TFormInitialValues = {
   firstName: ''
 }
 
-export enum FormFieldEnum {
-  firstNameField = 'firstName',
-  lastNameField = 'lastName',
-  patronymicField = 'patronymic',
-  dateOfBirthField = 'dateOfBirth',
-  emailField = 'email',
-  passwordField = 'password',
-  repeatPasswordField = 'repeatPassword',
-}
-
 export type TFormField = {
   name: string
   label: string
   requiredErrorMsg?: string
   invalidErrorMsg?: string
-}
-
-export type TFormFields = {
-  FormFieldEnum: TFormField
 }

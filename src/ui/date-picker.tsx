@@ -7,16 +7,19 @@ interface IInputFieldProps {
   label: string
 }
 
-export const InputField = (props: IInputFieldProps): ReactElement => {
+export const DatePicker = (props: IInputFieldProps): ReactElement => {
   const [field, meta] = useField(props)
 
   return (
     <TextField
       required
       fullWidth
-      type="text"
+      type="date"
       error={meta.touched && Boolean(meta.error)}
       helperText={meta.touched && meta.error}
+      InputLabelProps={{
+        shrink: true,
+      }}
       {...field}
       {...props}
     />

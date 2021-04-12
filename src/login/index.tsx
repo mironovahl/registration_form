@@ -1,12 +1,12 @@
 import React, { ReactElement, useState } from 'react'
 import { Button } from '@material-ui/core'
-import { Formik, Form } from 'formik'
 
-import { EmailForm, PasswordForm, UserDataForm } from './forms'
 import { StepProgress } from './step-progress'
 import { FormStepsEnum, TFormStep } from './types'
 import { LoginSuccess } from './login-success'
-import { validationSchema } from './login-form-model/validation-schema'
+import { UserDataForm } from './user-data-form'
+import { EmailForm } from './email-form'
+import { PasswordForm } from './password-form'
 
 const formSteps: TFormStep[] = [
   {

@@ -2,24 +2,23 @@ import React, { ReactElement } from 'react'
 import { useField } from 'formik'
 import { TextField } from '@material-ui/core'
 
-interface IInputFieldProps {
+type TInputType = 'text' | 'password'
+
+interface IInputProps {
   name: string
   label: string
+  required?: boolean
+  type?: TInputType
 }
 
-export const DateField = (props: IInputFieldProps): ReactElement => {
+export const Input = (props: IInputProps): ReactElement => {
   const [field, meta] = useField(props)
 
   return (
     <TextField
-      required
       fullWidth
-      type="date"
       error={meta.touched && Boolean(meta.error)}
       helperText={meta.touched && meta.error}
-      InputLabelProps={{
-        shrink: true,
-      }}
       {...field}
       {...props}
     />
