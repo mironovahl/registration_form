@@ -12,6 +12,8 @@ export const InputField = (props: IInputFieldProps): ReactElement => {
 
   return (
     <TextField
+      required
+      fullWidth
       type="text"
       error={meta.touched && Boolean(meta.error)}
       helperText={meta.touched && meta.error}

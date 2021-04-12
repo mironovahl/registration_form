@@ -1,12 +1,12 @@
 import React, { ReactElement, useState } from 'react'
 import { Button } from '@material-ui/core'
+import { Formik, Form } from 'formik'
 
 import { EmailForm, PasswordForm, UserDataForm } from './forms'
 import { StepProgress } from './step-progress'
 import { FormStepsEnum, TFormStep } from './types'
 import { LoginSuccess } from './login-success'
-import { Formik } from 'formik'
-import { formInitialValues } from './login-form-model/login-form-model'
+import { validationSchema } from './login-form-model/validation-schema'
 
 const formSteps: TFormStep[] = [
   {
@@ -32,12 +32,32 @@ const FormSteps = {
 export const LoginForm = (): ReactElement => {
   const [activeStep, setActiveStep] = useState(0)
 
-  const isLastStep = activeStep === formSteps.length
+  const isLastStep = activeStep === formSteps.length - 1
+  const isFirstStep = activeStep === 0
 
-  console.log(isLastStep, activeStep, formSteps.length)
+  const submitForm = (values, actions) => {
+    alert(JSON.stringify(values, null, 2))
+    actions.setSubmitting(false)
 
-  const handleClick = () => {
+    setActiveStep(activeStep + 1)
+  }
+
+  const handleSubmit = (values, actions) => {
+    if (isLastStep) {
+      submitForm(values, actions)
+    } else {
+      setActiveStep(prevState => prevState + 1)
+      actions.setTouched({})
+      actions.setSubmitting(false)
+    }
+  }
+
+  const nextStepClick = () => {
     setActiveStep(prevState => prevState + 1)
+  }
+
+  const previousStepClick = () => {
+    setActiveStep(prevState => prevState - 1)
   }
   const FormContent = FormSteps[formSteps[activeStep].label]
   return (
@@ -47,21 +67,20 @@ export const LoginForm = (): ReactElement => {
         totalSteps={formSteps.length}
         steps={formSteps}
       />
-      <Formik
-        initialValues={formInitialValues}
-        // validationSchema={currentValidationSchema}
-        // onSubmit={_handleSubmit}
-      >
-        <FormContent />
-      </Formik>
+
+      <FormContent onNext={nextStepClick}>
+        <Button type="submit" variant="contained" color="primary">
+          {!isLastStep ? 'Next' : 'Sign In'}
+        </Button>
+      </FormContent>
+
       {isLastStep && <LoginSuccess />}
-      <Button
-        onClick={handleClick}
-        type="submit"
-        variant="contained"
-        color="primary">
-        Next
-      </Button>
+
+      {!isFirstStep && (
+        <Button onClick={previousStepClick} variant="contained" color="primary">
+          Previous
+        </Button>
+      )}
     </div>
   )
 }

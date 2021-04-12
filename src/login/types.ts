@@ -27,12 +27,14 @@ export enum FormFieldEnum {
   dateOfBirthField = 'dateOfBirth',
   emailField = 'email',
   passwordField = 'password',
+  repeatPasswordField = 'repeatPassword',
 }
 
 export type TFormField = {
   name: string
   label: string
   requiredErrorMsg?: string
+  invalidErrorMsg?: string
 }
 
 export type TFormFields = {
