@@ -1,20 +1,18 @@
 import React, { ReactElement } from 'react'
 import { Stepper, Step, StepLabel } from '@material-ui/core'
-import { TFormStep } from './types'
+
+import { formSteps } from './steps'
 
 interface IStepProgressProps {
   activeStep: number
-  totalSteps: number
-  steps: TFormStep[]
 }
 
 export const StepProgress = ({
   activeStep,
-  steps,
 }: IStepProgressProps): ReactElement => {
   return (
-    <Stepper activeStep={activeStep}>
-      {steps.map(({ label }) => (
+    <Stepper activeStep={activeStep} alternativeLabel>
+      {formSteps.map(({ label }) => (
         <Step key={label}>
           <StepLabel>{label}</StepLabel>
         </Step>

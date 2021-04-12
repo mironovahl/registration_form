@@ -8,7 +8,7 @@ const selectUserDataSlice = (state: { userData: State }): State => {
   return userData
 }
 
-export const selectUserData = createSelector(
+export const selectPersonalInfo = createSelector(
   selectUserDataSlice,
   ({ email: _, ...userData }) => userData,
 )

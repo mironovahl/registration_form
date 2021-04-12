@@ -1,15 +1,16 @@
-import React from 'react'
+import React, { ReactElement } from 'react'
 import Head from 'next/head'
-import { LoginForm } from 'src/login'
 
-const Home = () => {
+import { Login } from 'src/login'
+
+const Home = (): ReactElement => {
   return (
     <>
       <Head>
         <title>Registration Form</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <LoginForm />
+      <Login />
     </>
   )
 }

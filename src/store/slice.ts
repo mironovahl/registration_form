@@ -10,7 +10,7 @@ export const initialState = {
 
 export type State = typeof initialState
 
-export type AddUserPayload = Omit<State, 'email'>
+export type AddPersonalPayload = Omit<State, 'email'>
 
 export type AddEmailPayload = Pick<State, 'email'>
 
@@ -18,7 +18,7 @@ export const userDataSlice = createSlice({
   name: 'userData',
   initialState,
   reducers: {
-    addUserData: (state, action: PayloadAction<AddUserPayload>) => {
+    addPersonalInfo: (state, action: PayloadAction<AddPersonalPayload>) => {
       return { ...state, ...action.payload }
     },
     addEmail: (state, action: PayloadAction<AddEmailPayload>) => {
@@ -27,4 +27,4 @@ export const userDataSlice = createSlice({
   },
 })
 
-export const { addEmail, addUserData } = userDataSlice.actions
+export const { addEmail, addPersonalInfo } = userDataSlice.actions

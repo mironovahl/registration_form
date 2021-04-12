@@ -5,7 +5,7 @@ enum EmailFieldEnum {
 export const emailFormField = {
   [EmailFieldEnum.emailField]: {
     name: 'email',
-    label: 'email name',
-    requiredErrorMsg: 'email is required',
+    label: 'Email',
+    requiredErrorMsg: 'Email is required',
   },
 }

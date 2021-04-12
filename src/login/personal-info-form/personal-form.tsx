@@ -2,29 +2,29 @@ import React, { ReactElement, ReactNode, useCallback } from 'react'
 import { Form, Formik } from 'formik'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { selectUserData } from 'src/store'
-import { addUserData, AddUserPayload } from 'src/store/slice'
+import { selectPersonalInfo } from 'src/store'
+import { addPersonalInfo, AddPersonalPayload } from 'src/store/slice'
 
 import { DatePicker } from '../../ui/date-picker'
 import { Input } from '../../ui/input'
 
 import { validationSchema } from './validation-schema'
-import { userDataFormField } from './form-model'
+import { personalInfo } from './form-model'
 
 type Props = {
   onNext: () => void
   children: ReactNode
 }
 
-export const UserDataForm = (props: Props): ReactElement => {
+export const PersonalInfoForm = (props: Props): ReactElement => {
   const { onNext, children } = props
-  const initialValues = useSelector(selectUserData)
+  const initialValues = useSelector(selectPersonalInfo)
 
   const dispatch = useDispatch()
 
   const onSubmit = useCallback(
-    (values: AddUserPayload) => {
-      dispatch(addUserData(values))
+    (values: AddPersonalPayload) => {
+      dispatch(addPersonalInfo(values))
       onNext()
     },
     [dispatch, onNext],
@@ -37,20 +37,23 @@ export const UserDataForm = (props: Props): ReactElement => {
       onSubmit={onSubmit}>
       <Form>
         <Input
-          name={userDataFormField.firstName.name}
-          label={userDataFormField.firstName.label}
+          name={personalInfo.firstName.name}
+          label={personalInfo.firstName.label}
+          required
         />
         <Input
-          name={userDataFormField.lastName.name}
-          label={userDataFormField.lastName.label}
+          name={personalInfo.lastName.name}
+          label={personalInfo.lastName.label}
+          required
         />
         <Input
-          name={userDataFormField.patronymic.name}
-          label={userDataFormField.patronymic.label}
+          name={personalInfo.patronymic.name}
+          label={personalInfo.patronymic.label}
+          required
         />
         <DatePicker
-          name={userDataFormField.birthDate.name}
-          label={userDataFormField.birthDate.label}
+          name={personalInfo.birthDate.name}
+          label={personalInfo.birthDate.label}
         />
         {children}
       </Form>

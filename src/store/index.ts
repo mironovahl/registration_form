@@ -1,5 +1,5 @@
-export { addEmail, addUserData } from './slice'
+export { addEmail, addPersonalInfo } from './slice'
 export { store } from './store'
-export { selectEmail, selectUserData } from './selectors'
+export { selectEmail, selectPersonalInfo } from './selectors'
 
-export type { AddUserPayload } from './slice'
+export type { AddPersonalPayload } from './slice'

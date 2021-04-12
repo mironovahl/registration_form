@@ -1,7 +1,5 @@
 import { Form, Formik } from 'formik'
 import React, { ReactElement, ReactNode, useCallback } from 'react'
-import { useSelector } from 'react-redux'
-import { selectEmail, selectUserData } from 'src/store'
 
 import { Input } from 'src/ui/input'
 
@@ -21,12 +19,6 @@ const initialValues = {
 export const PasswordForm = (props: Props): ReactElement => {
   const { onNext, children } = props
 
-  const state = useSelector(state => state)
-  const submitForm = (values, actions) => {
-    alert(JSON.stringify(state, null, 2))
-    actions.setSubmitting(false)
-  }
-
   const onSubmit = useCallback(() => {
     onNext()
   }, [onNext])
@@ -35,17 +27,19 @@ export const PasswordForm = (props: Props): ReactElement => {
     <Formik
       initialValues={initialValues}
       validationSchema={validationSchema}
-      onSubmit={submitForm}>
+      onSubmit={onSubmit}>
       <Form>
         <Input
           type={'password'}
           name={passwordFormField.password.name}
           label={passwordFormField.password.label}
+          required
         />
         <Input
           type={'password'}
           name={passwordFormField.confirmPassword.name}
           label={passwordFormField.confirmPassword.label}
+          required
         />
         {children}
       </Form>

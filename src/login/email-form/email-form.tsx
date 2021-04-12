@@ -38,6 +38,7 @@ export const EmailForm = (props: Props): ReactElement => {
         <Input
           name={emailFormField.email.name}
           label={emailFormField.email.label}
+          required
         />
         {children}
       </Form>

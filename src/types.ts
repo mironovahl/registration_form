@@ -1,12 +1,12 @@
 export enum FormStepsEnum {
-  userDataStep = 'userData',
+  personalInfoStep = 'personalInfo',
   emailStep = 'email',
   passwordStep = 'password',
 }
 
 export type TFormStep = {
-  label: FormStepsEnum
-  value: string
+  label: string
+  value: FormStepsEnum
 }
 
 export type InputData = {
