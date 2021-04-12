@@ -10,6 +10,7 @@ import { Input } from '../../ui/input'
 
 import { validationSchema } from './validation-schema'
 import { personalInfo } from './form-model'
+import { useStyles } from '../styles'
 
 type Props = {
   onNext: () => void
@@ -20,11 +21,15 @@ export const PersonalInfoForm = (props: Props): ReactElement => {
   const { onNext, children } = props
   const initialValues = useSelector(selectPersonalInfo)
 
+  const classes = useStyles()
+
   const dispatch = useDispatch()
 
   const onSubmit = useCallback(
     (values: AddPersonalPayload) => {
-      dispatch(addPersonalInfo(values))
+      dispatch(
+        addPersonalInfo({ ...values, birthDate: String(values.birthDate) }),
+      )
       onNext()
     },
     [dispatch, onNext],
@@ -35,7 +40,7 @@ export const PersonalInfoForm = (props: Props): ReactElement => {
       initialValues={initialValues}
       validationSchema={validationSchema}
       onSubmit={onSubmit}>
-      <Form>
+      <Form className={classes.form}>
         <Input
           name={personalInfo.firstName.name}
           label={personalInfo.firstName.label}
@@ -54,6 +59,7 @@ export const PersonalInfoForm = (props: Props): ReactElement => {
         <DatePicker
           name={personalInfo.birthDate.name}
           label={personalInfo.birthDate.label}
+          required
         />
         {children}
       </Form>

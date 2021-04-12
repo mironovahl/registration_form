@@ -2,18 +2,18 @@ import { createSelector } from '@reduxjs/toolkit'
 
 import { initialState, State } from './slice'
 
-const selectUserDataSlice = (state: { userData: State }): State => {
+export const selectUserData = (state: { userData: State }): State => {
   const { userData = initialState } = state
 
   return userData
 }
 
 export const selectPersonalInfo = createSelector(
-  selectUserDataSlice,
+  selectUserData,
   ({ email: _, ...userData }) => userData,
 )
 
 export const selectEmail = createSelector(
-  selectUserDataSlice,
+  selectUserData,
   userData => userData.email,
 )

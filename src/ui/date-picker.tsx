@@ -1,27 +1,49 @@
-import React, { ReactElement } from 'react'
+import React, { ReactElement, useEffect, useState } from 'react'
 import { useField } from 'formik'
-import { TextField } from '@material-ui/core'
+import {
+  KeyboardDatePicker,
+  MuiPickersUtilsProvider,
+} from '@material-ui/pickers'
+import DateFnsUtils from '@date-io/date-fns'
 
 interface IInputFieldProps {
   name: string
   label: string
+  required?: boolean
 }
 
 export const DatePicker = (props: IInputFieldProps): ReactElement => {
-  const [field, meta] = useField(props)
+  const [field, meta, helper] = useField(props)
+  const { setValue } = helper
+  const { value } = field
+  const [date, setDate] = useState<Date | null>(null)
+
+  useEffect(() => {
+    if (value) {
+      const date = new Date(value)
+      setDate(date)
+    }
+  }, [value])
+
+  const onChange = date => {
+    if (date) {
+      setDate(date)
+      setValue(date)
+    }
+  }
 
   return (
-    <TextField
-      required
-      fullWidth
-      type="date"
-      error={meta.touched && Boolean(meta.error)}
-      helperText={meta.touched && meta.error}
-      InputLabelProps={{
-        shrink: true,
-      }}
-      {...field}
-      {...props}
-    />
+    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+      <KeyboardDatePicker
+        {...field}
+        {...props}
+        format="dd/MM/yyyy"
+        value={date}
+        onChange={onChange}
+        error={meta.touched && Boolean(meta.error)}
+        helperText={meta.touched && meta.error}
+        invalidDateMessage={meta.touched && Boolean(meta.error)}
+      />
+    </MuiPickersUtilsProvider>
   )
 }

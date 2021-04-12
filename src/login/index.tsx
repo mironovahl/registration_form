@@ -13,8 +13,10 @@ export const Login = (): ReactElement => {
 
   return (
     <Container maxWidth="sm">
-      <Paper style={{ padding: '24px' }}>
-        <Typography variant="h4">Sign In</Typography>
+      <Paper style={{ padding: '32px' }}>
+        <Typography variant="h4" align={'center'}>
+          Sign In
+        </Typography>
 
         <StepProgress activeStep={activeStep} />
 

@@ -1,5 +1,5 @@
 import React, { Dispatch, ReactElement, SetStateAction } from 'react'
-import { Box, Button } from '@material-ui/core'
+import { Box, Button, Container } from '@material-ui/core'
 
 import { FormStepsEnum } from 'src/types'
 
@@ -37,24 +37,27 @@ export const LoginForm = ({
   const FormContent = FormSteps[formSteps[activeStep].value]
 
   return (
-    <FormContent onNext={nextStepClick}>
-      <Box display={'flex'} justifyContent={'flex-end'}>
-        {!isFirstStep && (
+    <Container maxWidth="xs">
+      <FormContent onNext={nextStepClick}>
+        <Box display={'flex'} justifyContent={'space-between'} my={2}>
+          {!isFirstStep && (
+            <Button
+              onClick={previousStepClick}
+              variant="outlined"
+              color="primary">
+              Previous
+            </Button>
+          )}
+
           <Button
-            onClick={previousStepClick}
-            variant="outlined"
+            type="submit"
+            variant="contained"
+            disableElevation
             color="primary">
-            Previous
+            {!isLastStep ? 'Next' : 'Sign In'}
           </Button>
-        )}
-        <Button
-          type="submit"
-          variant="contained"
-          disableElevation
-          color="primary">
-          {!isLastStep ? 'Next' : 'Sign In'}
-        </Button>
-      </Box>
-    </FormContent>
+        </Box>
+      </FormContent>
+    </Container>
   )
 }
