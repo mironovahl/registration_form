@@ -37,6 +37,7 @@ export const DatePicker = (props: IInputFieldProps): ReactElement => {
       <KeyboardDatePicker
         {...field}
         {...props}
+        fullWidth
         format="dd/MM/yyyy"
         value={date}
         onChange={onChange}
